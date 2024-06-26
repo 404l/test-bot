@@ -1,10 +1,12 @@
 package com.starnovskiy.testbot.model;
 
-import com.google.gson.annotations.SerializedName;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.io.Serializable;
@@ -13,46 +15,57 @@ import java.io.Serializable;
 @Getter
 @Setter
 @Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class Message implements Serializable {
-    @SerializedName(value = "user_id")
+    @JsonProperty(value = "user_id")
     Long userId;
-    @SerializedName(value = "random_id")
+    @JsonProperty(value = "random_id")
     Long randomId;
-    @SerializedName(value = "peer_id")
+    @JsonProperty(value = "peer_id")
     Long peerId;
-    @SerializedName(value = "peer_ids")
+    @JsonProperty(value = "peer_ids")
     String peerIds;
+    @JsonProperty(value = "domain")
     String domain;
-    @SerializedName(value = "chat_id")
+    @JsonProperty(value = "chat_id")
     Long chatId;
-    @SerializedName(value = "user_ids")
+    @JsonProperty(value = "user_ids")
     String userIds;
-    @SerializedName(value = "message")
+    @JsonProperty(value = "message")
     String text;
+    @JsonProperty(value = "guid")
     Long guid;
+    @JsonProperty(value = "lat")
     String lat;
-    @SerializedName(value = "long")
+    @JsonProperty(value = "long")
     String longField;
+    @JsonProperty(value = "attachment")
     String attachment;
-    @SerializedName(value = "reply_to")
+    @JsonProperty(value = "reply_to")
     Long replyTo;
-    @SerializedName(value = "forward_messages")
+    @JsonProperty(value = "forward_messages")
     String forwardMessages;
+    @JsonProperty(value = "forward")
     String forward;
-    @SerializedName(value = "sticker_id")
+    @JsonProperty(value = "sticker_id")
     Long stickerId;
-    @SerializedName(value = "group_id")
+    @JsonProperty(value = "group_id")
     Long groupId;
+    @JsonProperty(value = "keyboard")
     String keyboard;
+    @JsonProperty(value = "template")
     String template;
+    @JsonProperty(value = "payload")
     String payload;
-    @SerializedName(value = "content_source")
+    @JsonProperty(value = "content_source")
     String contentSource;
-    @SerializedName(value = "dont_parse_links")
+    @JsonProperty(value = "dont_parse_links")
     Integer dontParseLinks;
-    @SerializedName(value = "disable_mentions")
+    @JsonProperty(value = "disable_mentions")
     Integer disableMentions;
+    @JsonProperty(value = "intent")
     String intent;
-    @SerializedName(value = "subscribe_id")
+    @JsonProperty(value = "subscribe_id")
     Long subscribeId;
 }

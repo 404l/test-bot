@@ -1,11 +1,12 @@
 package com.starnovskiy.testbot.service.impl;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.starnovskiy.testbot.model.Message;
 import com.starnovskiy.testbot.service.CallbackBotService;
 import com.starnovskiy.testbot.service.MessageSenderService;
 
-import com.google.gson.Gson;
 import lombok.RequiredArgsConstructor;
+import lombok.SneakyThrows;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -14,10 +15,11 @@ public class CallbackBotServiceImpl implements CallbackBotService {
 
     private final MessageSenderService<Message> messageSenderService;
 
+    @SneakyThrows
     @Override
-    public String createCallbackMessage(Message message){
+    public String createCallbackMessage(Message message) {
+        ObjectMapper mapper = new ObjectMapper();
 
-        Gson gson = new Gson();
         Message callbackMessage = Message.builder()
                 .userId(1L)
                 .randomId(0L)
@@ -39,16 +41,15 @@ public class CallbackBotServiceImpl implements CallbackBotService {
                 .template(message.getTemplate())
                 .payload(message.getPayload())
                 .contentSource(message.getContentSource())
-                .dontParseLinks(1)
+                .dontParseLinks(message.getDontParseLinks())
                 .disableMentions(message.getDisableMentions())
                 .intent(message.getIntent())
                 .subscribeId(message.getSubscribeId())
                 .build();
 
         messageSenderService.send(callbackMessage);
-        return gson.toJson(callbackMessage);
+
+        return mapper.writeValueAsString(callbackMessage);
     }
-
-
 
 }
